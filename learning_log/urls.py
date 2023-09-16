@@ -15,9 +15,8 @@ Including another URLconf
 """
 from django.urls import path, include
 from django.contrib import admin
-from django.http import HttpResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('learning_logs.urls')),
+    path('', include(('learning_logs.urls', 'learning_logs'), namespace='learning_logs')),
     ]
