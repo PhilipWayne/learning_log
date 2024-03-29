@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #My apps
+
+    # Third party apps
+    'bootstrap3',
+
+    # My apps
     'learning_logs',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +134,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #My settings
 DATETIME_FORMAT = "M d, Y H:i"
+LOGIN_URL = '/users/login/'
+
+# Settings for django-bootstrap3
+BOOTSTRAP = {
+    'include_jquery': True,
+}
