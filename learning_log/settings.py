@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import dj_database_url
 from pathlib import Path
-from django.conf import settings
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -83,22 +82,9 @@ WSGI_APPLICATION = 'learning_log.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-'''DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}'''
-
+# Use dj_database_url to parse the DATABASE_URL environment variable provided by Heroku
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'DatabaseName',
-        'USER': 'DatabaseUserName',
-        'PASSWORD': 'DatabaseUserpassword',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
 
 
@@ -158,9 +144,8 @@ BOOTSTRAP = {
 if 'DYNO' in os.environ:
     import dj_database_url
 
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
-    }
+    # Update DATABASES setting to use dj_database_url
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
     # Honor the 'X-Forwarded-Proto' header for request.is_secure().
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
