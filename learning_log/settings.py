@@ -12,6 +12,7 @@ from pathlib import Path
 from django.conf import settings
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -145,14 +146,16 @@ if 'DYNO' in os.environ:
     import dj_database_url
 
     DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
+        'default': dj_database_url.config(default='postgres://keodluipjiomum:17d55abc6aec55f5b2d2cc565534d8fe9a0310d3ad314b79c53a1b719d109422@ec2-44-213-151-75.compute-1.amazonaws.com:5432/d9itdld7uis6hf')
     }
 
     # Honor the 'X-Forwarded-Proto' header for request.is_secure().
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    # Allow all host headers.
-    ALLOWED_HOSTS = ['*']
+    # Allow only Heroku to host the project.
+    ALLOWED_HOSTS = ['learning-log-11-69e70d571c5b.herokuapp.com']
+
+    DEBUG = False
 
 # Static asset configuration
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
