@@ -116,3 +116,7 @@ def my_view(request):
     
     return render(request, 'my_template.html', {'form': form})
 
+def custom_404(request, exception):
+    print("Custom 404 function called.")
+    return render(request, '404.html', status=404)
+
